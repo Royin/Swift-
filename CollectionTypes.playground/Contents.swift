@@ -259,9 +259,44 @@ var airports2 = ["YYZ": "Toronto Pearson", "DUB": "Dublin"]
 // 访问和修改字典 Accessing and Modifying a Dictionary
 
 airports["LHR"] = "London"              // 使用下标语法添加新数据
-airports["LHR"] = "London Heathrow"     // 
+airports["LHR"] = "London Heathrow"     // 修改
 
 
+// updateValue(_:forKey) 无对应值时设置新值或更新已存在值，并返回更新前原值
+
+if let oldValue = airports.updateValue("Dublin Airport", forKey: "DUB") {
+    print("The old value for DUB was \(oldValue).")
+}
+
+if let airportName = airports["DUB"] {
+    print("The name of the airport is \(airportName).")
+} else {
+    print("That airport is not in the airports dictionary.")
+}
+
+airports["APL"] = "Apple Internation"
+airports["APL"] = nil   // 通过赋值为nil移除一个键值对
+
+
+// removeValueForKey(_:) 方法移除字典键值对  有返回被移除值，无返回nil
+
+if let removedValue = airports.removeValueForKey("DUB") {
+    print("The removed airport's name is \(removedValue).")
+}
+
+
+// 字典遍历    Iterating  Over a Dictionary
+
+for (airportCode, airportName) in airports {
+    print("\(airportCode): \(airportName)") // 以(key, value)形式返回
+}
+
+for airportCode in airports.keys {
+    print("Airport code: \(airportCode)") // 通过keys values属性遍历
+}
+
+let airportCodes = [String](airports.keys) // keys 构造新数组
+let airportNames = [String](airports.values) // values 构造新数组
 
 
 
