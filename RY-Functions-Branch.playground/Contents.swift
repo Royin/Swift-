@@ -229,8 +229,37 @@ func stepBackward(input: Int) -> Int {
     return input - 1
 }
 
+func chooseStepFunction(backwards: Bool) -> (Int) -> Int {
+    return backwards ? stepBackward : stepForward  // 返回类型是一个函数类型
+}
+
+var currentValue = 3
+let moveNearerToZero = chooseStepFunction(currentValue > 0)
+
+print("Counting to zero:")
+while currentValue != 0 {
+    print("\(currentValue)...")
+    currentValue = moveNearerToZero(currentValue)
+}
+print("zero!")
 
 
+
+// -- 嵌套函数  Nested Functions
+
+func chooseStepFunction22(backwards: Bool) -> (Int) -> Int {
+    func stepForward(input: Int) -> Int { return input + 1 }
+    func stepBackward(input: Int) -> Int { return input - 1 }
+    return backwards ? stepBackward : stepForward
+}
+
+var currentValue2 = -4
+let moveNearerToZero2 = chooseStepFunction(currentValue > 0)
+while currentValue != 0 {
+    print("\(currentValue)... ")
+    currentValue = moveNearerToZero(currentValue)
+}
+print("zero!")
 
 
 
